@@ -28,7 +28,7 @@ joyce-website/
 │   └── videos/                 # Short (<10 MB) silent UI loop videos
 └── src/
     ├── content.config.ts       # Strict Zod schema validating all project .mdx frontmatter
-    ├── content/projects/       # All portfolio projects (.mdx files — 1 file per project)
+    ├── content/projects/       # All portfolio projects (.mdx files, 1 file per project)
     ├── styles/tokens.css       # Tier 1 Global CSS Design Tokens (site-wide variables)
     ├── layouts/
     │   ├── BaseLayout.astro    # HTML head, Google Fonts, View Transitions, Navbar/Footer toggle
@@ -41,7 +41,7 @@ joyce-website/
     │   ├── ProjectCard.astro   # Single reusable accessible project card
     │   └── MetaGrid.astro      # 5-column case study metadata grid
     └── pages/
-        ├── index.astro                 # Home (/) — intentionally has showNavbar={false}
+        ├── index.astro                 # Home (/), intentionally has showNavbar={false}
         ├── all-lxd-projects.astro      # Learning Experience Design (/all-lxd-projects)
         ├── all-ux-projects.astro       # User Experience Design (/all-ux-projects)
         ├── all-graphic-design.astro    # Graphic Design (/all-graphic-design)
@@ -58,14 +58,14 @@ joyce-website/
 * **Strict Data Separation:** Never hardcode repeated project cards or case study text inside `.astro` components. All project data and case study copy belong in `src/content/projects/*.mdx`.
 
 ### B. The 3-Tier Style Isolation System (Preventing Accidental Cross-Page Style Bleed)
-1. **Tier 1 — Global Site Tokens (`src/styles/tokens.css`):**
+1. **Tier 1: Global Site Tokens (`src/styles/tokens.css`):**
    * Controls the **entire website** (`--primary-blue`, fonts, surface colors).
    * **Rule:** Never edit `src/styles/tokens.css` unless the user explicitly asks for a **site-wide** change.
-2. **Tier 2 — Component / Section Scoped CSS (`<style>` inside `.astro` files):**
+2. **Tier 2: Component / Section Scoped CSS (`<style>` inside `.astro` files):**
    * Astro automatically compiles `<style>` blocks with a unique cryptographic scope attribute (`data-astro-cid-*`), guaranteeing that styles in one component (`HeroJY.astro`, `resume.astro`) **cannot leak** to other pages.
    * **Rule:** Edit a shared component (`ProjectCard.astro`, `CaseStudyLayout.astro`) only when the user wants all cards or all case studies updated.
-3. **Tier 3 — Single-Page / Single-Project Overrides:**
-   * When the user wants a custom accent color or bespoke interactive block on **only one project page** (e.g., `/firesafety`), set `accentColor` in that project's `.mdx` frontmatter or import a dedicated component inside that `.mdx` file—leaving every other page untouched.
+3. **Tier 3: Single-Page / Single-Project Overrides:**
+   * When the user wants a custom accent color or bespoke interactive block on **only one project page** (e.g., `/firesafety`), set `accentColor` in that project's `.mdx` frontmatter or import a dedicated component inside that `.mdx` file, leaving every other page untouched.
 
 ### C. Smart Question Protocol & Cross-Page Parallelism Audit (SOP)
 * **Never Download Videos Into the Repo or Over-Engineer Missing Content (Ask the User for Links):**
@@ -80,6 +80,9 @@ joyce-website/
   * Before making any major structural or content change the user did not ask for.
 * **Do Not Bombard on Minor Technical Polish:**
   * Apply professional UX and web engineering defaults automatically for responsive breakpoints, keyboard focus states, `alt` text, and obvious spelling typos, and report them in the post-change summary.
+* **Copy & Human Voice Guardrails (No AI-Sounding Text):**
+  * **No em-dashes (`—`) anywhere** in site copy, project `.mdx` files, `<title>` tags, or documentation. Use commas, periods, colons, parentheses, or `|` / `·` for title and subtitle separators.
+  * **Keep headings and descriptions natural and direct:** Avoid inflated phrasing or unnecessary academic name-dropping when plain language says it better (e.g., use **"Custom JavaScript"** instead of *"Custom JavaScript Rotational Physics"*; write **"To lower cognitive load..."** instead of citing *"Sweller's Cognitive Load Theory"*; skip terms like *"Temporal Contiguity"* or *"Mayer's Signaling & Segmenting Principles"* unless genuinely needed).
 * **Continuous SOP Evolution Rule:**
   * Whenever the user points out a process improvement, missed pattern, or workflow preference, the agent **must immediately update `SPEC.md`, `DESIGN_SYSTEM.md`, `PLAYBOOK.md`, and/or `scripts/qa-check.mjs`** in the same turn so all future agents permanently inherit that SOP.
 
@@ -87,22 +90,22 @@ joyce-website/
 
 ## 4. The 6-Lens Review System (2-Tier QA Policy)
 
-* **Tier 1 — Fast Iteration Mode (Default for live back-and-forth CSS, layout, copy, or single-project tweaks):**
+* **Tier 1: Fast Iteration Mode (Default for live back-and-forth CSS, layout, copy, or single-project tweaks):**
   * **Skip the browser subagent** (the user already has `http://localhost:4321` open live via Vite HMR).
   * Run only the fast ~3-second CLI checks (`npm.cmd run qa:spell; npm.cmd run qa:links`) when content/code changes.
   * Keep the reply concise (no need to print a full 6-Lens Scorecard for tiny edits).
-* **Tier 2 — Full Review & Consolidated Browser QA (Major Milestones & Pre-Deploy Only):**
+* **Tier 2: Full Review & Consolidated Browser QA (Major Milestones & Pre-Deploy Only):**
   * Trigger live browser subagent verification **only** when: (a) building a brand-new component or major layout overhaul, (b) doing a single consolidated Desktop + Mobile sweep right before deploying to GitHub Pages, or (c) when the user explicitly asks to verify in the browser / check mobile.
   * Evaluate across all 6 lenses:
-  1. **Pass 1 — UX / Graphic Designer (Proactive Visual Critique & Live Render Check):**
+  1. **Pass 1: UX / Graphic Designer (Proactive Visual Critique & Live Render Check):**
      * **Never Rubber-Stamp Major Visual Changes:** On Tier 2 milestones, visually inspect the live browser render (Desktop + Mobile) to verify CSS rules loaded cleanly and catch subtle layout/blend/overflow bugs.
-     * **Have Strong Design Opinions:** Actively critique spacing, visual hierarchy (e.g., primary vs. secondary button weight, "button soup" next to pill tags, awkward line-wrapping at mid-sized viewports), alignment, and proportion—and proactively offer cleaner UX alternatives whenever a layout feels crowded or unbalanced.
+     * **Have Strong Design Opinions:** Actively critique spacing, visual hierarchy (e.g., primary vs. secondary button weight, "button soup" next to pill tags, awkward line-wrapping at mid-sized viewports), alignment, and proportion, and proactively offer cleaner UX alternatives whenever a layout feels crowded or unbalanced.
      * **Cross-Page Copy & Label Parallelism:** Audit headings, dropdowns, and CTAs across sibling pages (`DESIGN_SYSTEM.md`), plus responsive behavior (Desktop/Tablet/Mobile) and WCAG 2.1 AA accessibility.
-  2. **Pass 2 — Principal Web Dev:** Smoothness (`60fps` transitions), zero iframe polling hacks, clean Astro patterns, and GitHub Pages compatibility.
-  3. **Pass 3 — Software Architect:** Single responsibility, 3-Tier Style Isolation compliance, and zero duplicated data.
-  4. **Pass 4 — General QA (`npm.cmd run qa:spell` + `npm.cmd run qa:links`, plus `astro build` pre-deploy):** Automated spellcheck (`cspell`), internal/external broken link validation (`scripts/qa-check.mjs`), and cross-page naming consistency check. *(Avoid running `astro build` while `astro dev` is active to prevent `.astro/` cache collisions.)*
-  5. **Pass 5 — Docs & Playbook Sync:** Verify `SPEC.md`, `DESIGN_SYSTEM.md`, and `PLAYBOOK.md` remain accurate.
-  6. **Pass 6 — LXD / UXD / ID Career Advisor ("The Subtle Mentor"):** Non-blocking, **1–2 sentences max** at the bottom of milestone summaries (`💡 Career Advisor Note`).
+  2. **Pass 2: Principal Web Dev:** Smoothness (`60fps` transitions), zero iframe polling hacks, clean Astro patterns, and GitHub Pages compatibility.
+  3. **Pass 3: Software Architect:** Single responsibility, 3-Tier Style Isolation compliance, and zero duplicated data.
+  4. **Pass 4: General QA (`npm.cmd run qa:spell` + `npm.cmd run qa:links`, plus `astro build` pre-deploy):** Automated spellcheck (`cspell`), internal/external broken link validation (`scripts/qa-check.mjs`), and cross-page naming consistency check. *(Avoid running `astro build` while `astro dev` is active to prevent `.astro/` cache collisions.)*
+  5. **Pass 5: Docs & Playbook Sync:** Verify `SPEC.md`, `DESIGN_SYSTEM.md`, and `PLAYBOOK.md` remain accurate.
+  6. **Pass 6: LXD / UXD / ID Career Advisor ("The Subtle Mentor"):** Non-blocking, **1–2 sentences max** at the bottom of milestone summaries (`💡 Career Advisor Note`).
 
 ### Post-Change Summary Format
 * **Tier 1 (Small Tweaks):** Brief, direct summary of what changed (1–3 bullets).

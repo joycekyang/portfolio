@@ -113,8 +113,8 @@ for (const spFile of sectionPageFiles) {
     const hMatch = spContent.match(/heading=["']([^"']+)["']/);
     const tMatch = spContent.match(/title=["']([^"']+)["']/);
     if (hMatch) sectionHeadings.add(hMatch[1]);
-    if (tMatch && !/^All .+ Projects — Joyce Yang$/.test(tMatch[1])) {
-      fail(`${spFile} has non-parallel page title "${tMatch[1]}" (expected "All <Section> Projects — Joyce Yang").`);
+    if (tMatch && !/^All .+ Projects \| Joyce Yang$/.test(tMatch[1])) {
+      fail(`${spFile} has non-parallel page title "${tMatch[1]}" (expected "All <Section> Projects | Joyce Yang").`);
     }
   }
 }

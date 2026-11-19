@@ -67,6 +67,7 @@ This document captures the visual identity, typography, motion principles, and a
 1. **Cross-Page Copy & Naming Parallelism:**
    * All sibling section pages (`/all-lxd-projects`, `/all-ux-projects`, `/all-graphic-design`) must use parallel `<h1>` headings, `<title>` formats, and Navbar dropdown `"All ... Projects"` labels.
    * Any deviation in CTA button wording, heading structure, or nav naming across sibling items must be flagged to the user for approval.
-2. **No Nested Interactive Elements:** Project cards use a semantic `<article>` with an `<a>` inside the `<h2>` whose `::after` pseudo-element stretches across the card—never `<a class="card"><button>...</button></a>`.
+2. **No Nested Interactive Elements:** Project cards use a semantic `<article>` with an `<a>` inside the `<h2>` whose `::after` pseudo-element stretches across the card, never `<a class="card"><button>...</button></a>`.
 3. **Keyboard Navigation:** Visible `3px solid #3321FF` focus ring on `:focus-visible` and a `"Skip to main content"` link at the top of every page.
 4. **Meaningful Alt Text:** Every `<img>` requires a descriptive `alt` attribute (verified automatically by `npm.cmd run qa`).
+5. **Natural, Human Copy:** Avoid em-dashes (`—`) and overly academic or AI-sounding jargon in case study copy, titles, and docs. Use direct, plain language and standard separators (`|`, `·`, `:`, commas, or periods).

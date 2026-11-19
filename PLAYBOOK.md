@@ -46,7 +46,7 @@ Because Astro compiles `.astro` and `.mdx` files into optimized HTML automatical
 1. Push this folder to your GitHub repository (`main` branch).
 2. On GitHub.com, open your repository and go to **Settings** → **Pages** (in the left sidebar).
 3. Under **Build and deployment** → **Source**, change the dropdown from `Deploy from a branch` to **`GitHub Actions`**.
-4. *(Optional — Custom Domain):* In that same **Pages** settings screen, type `www.joycekyang.com` under **Custom domain** and click **Save**.
+4. *(Optional: Custom Domain):* In that same **Pages** settings screen, type `www.joycekyang.com` under **Custom domain** and click **Save**.
 
 From that moment on, every time you `git push` to `main`, GitHub Actions automatically runs `.github/workflows/deploy.yml`, builds your Astro site into static `index.html` pages, and publishes them live in ~45 seconds!
 
@@ -56,7 +56,7 @@ From that moment on, every time you `git push` to `main`, GitHub Actions automat
 
 | Media Type | Where to Put It / Host It | How to Prompt the Agent |
 | :--- | :--- | :--- |
-| **Resume (PDF + Image)** | Drop your PDF in `public/resume/Joyce_Yang_Resume.pdf` (or use Google Drive) and your resume preview PNG in `public/images/resume.png`. | *"I dropped a new resume image in `public/images/resume.png` and PDF in `public/resume/`—update the Resume page."* |
+| **Resume (PDF + Image)** | Drop your PDF in `public/resume/Joyce_Yang_Resume.pdf` (or use Google Drive) and your resume preview PNG in `public/images/resume.png`. | *"I dropped a new resume image in `public/images/resume.png` and PDF in `public/resume/`. Update the Resume page."* |
 | **Project Images & Mockups (`PNG`, `JPG`, `WebP`, `GIF`)** | **Put inside the repo** in `public/images/projects/<project-name>/`. Local repo images never expire when you cancel Squarespace. | *"Add `public/images/projects/firesafety/screen1.png` to the Fire Safety gallery."* |
 | **Short UI Video Loops (< 10 MB, 3–8 sec, silent)** | Can be placed directly in `public/videos/`. | *"Embed `public/videos/demo-loop.mp4` as a muted auto-playing loop on the Billing Training page."* |
 | **Full Videos / Camtasia Demos (> 10 MB, narrated)** | **Always host externally** on **YouTube (Public or Unlisted)**, **Vimeo**, or **Loom**. *(GitHub caps files at 100 MB and raw videos slow down mobile visitors.)* | *"Embed this YouTube video `https://www.youtube.com/embed/...` on the Camtasia project page."* |
@@ -117,12 +117,12 @@ Because the 2-column project grid and the top `Navbar.astro` dropdowns are gener
 
 Because our codebase uses **3-Tier Style Isolation** (see `SPEC.md`), tell the agent **which scope** you want when asking for visual changes:
 
-1. **For the Entire Website (Tier 1 — `src/styles/tokens.css`):**
+1. **For the Entire Website (Tier 1: `src/styles/tokens.css`):**
    * *Prompt:* `"Across the entire site, change the primary blue accent color from #3321FF to #2563EB."`
-2. **For One Component or Gallery Type (Tier 2 — Scoped `.astro` Component):**
+2. **For One Component or Gallery Type (Tier 2: Scoped `.astro` Component):**
    * *Prompt:* `"On all project cards, make the skill tag pills have a soft blue background with dark blue text."` *(Only `ProjectCard.astro` changes).*
-3. **For Only One Specific Page or Project (Tier 3 — Single-Page Override):**
-   * *Prompt:* `"On ONLY the Fire Safety case study page, change the accent color to crimson (#E11D48) and add a 3-card callout box under Visual Direction."` *(Only `firesafety.mdx` changes—zero impact on any other page).*
+3. **For Only One Specific Page or Project (Tier 3: Single-Page Override):**
+   * *Prompt:* `"On ONLY the Fire Safety case study page, change the accent color to crimson (#E11D48) and add a 3-card callout box under Visual Direction."` *(Only `firesafety.mdx` changes, with zero impact on any other page).*
 
 > **Agent Enforcement Rule:** If you ask for a style change without specifying whether it is for *one page* or *all pages*, the agent is required by `SPEC.md` to ask you a quick 1-question scope check before editing code.
 
@@ -132,7 +132,7 @@ Because our codebase uses **3-Tier Style Isolation** (see `SPEC.md`), tell the a
 
 When you want to add a rich new animation (e.g., scroll-triggered storyboards, interactive before/after sliders, or micro-interactions in Phase 2):
 
-1. **Step 1 — Planning & Storyboarding Prompt:**
-   * Tell the agent: *"Let's plan an animation for [page/section]. Don't write code yet—propose 2 options with how it triggers (scroll/hover/load), how fast it moves, and how it behaves on mobile."*
-2. **Step 2 — Isolated Component Execution & Live Preview:**
+1. **Step 1: Planning & Storyboarding Prompt:**
+   * Tell the agent: *"Let's plan an animation for [page/section]. Don't write code yet; propose 2 options with how it triggers (scroll/hover/load), how fast it moves, and how it behaves on mobile."*
+2. **Step 2: Isolated Component Execution & Live Preview:**
    * Once you pick an option, the agent builds it as a self-contained component in `src/components/animations/` (with `@media (prefers-reduced-motion: reduce)` built in) so you can preview it live in VS Code at `http://localhost:4321` without touching any other page's styles.
