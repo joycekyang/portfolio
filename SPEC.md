@@ -19,6 +19,7 @@ joyce-website/
 ├── _legacy_squarespace/        # Archived original Squarespace HTML blocks (read-only reference)
 ├── cspell.json                 # Custom spellcheck dictionary for LXD/UXD/ID domain terms
 ├── scripts/qa-check.mjs        # Automated internal route, URL, schema & accessibility validator
+├── AGENTS.md                   # Auto-loaded root instructions for AI coding agents
 ├── SPEC.md                     # Master architecture & 6-Lens AI workflow rules (THIS FILE)
 ├── DESIGN_SYSTEM.md            # Visual tokens, typography, motion & WCAG accessibility rules
 ├── PLAYBOOK.md                 # Human & Agent how-to guide (Git, VS Code, media, recipes)
@@ -84,7 +85,7 @@ joyce-website/
   * **No em-dashes (`—`) anywhere** in site copy, project `.mdx` files, `<title>` tags, or documentation. Use commas, periods, colons, parentheses, or `|` / `·` for title and subtitle separators.
   * **Keep headings and descriptions natural and direct:** Avoid inflated phrasing or unnecessary academic name-dropping when plain language says it better (e.g., use **"Custom JavaScript"** instead of *"Custom JavaScript Rotational Physics"*; write **"To lower cognitive load..."** instead of citing *"Sweller's Cognitive Load Theory"*; skip terms like *"Temporal Contiguity"* or *"Mayer's Signaling & Segmenting Principles"* unless genuinely needed).
 * **Continuous SOP Evolution Rule:**
-  * Whenever the user points out a process improvement, missed pattern, or workflow preference, the agent **must immediately update `SPEC.md`, `DESIGN_SYSTEM.md`, `PLAYBOOK.md`, and/or `scripts/qa-check.mjs`** in the same turn so all future agents permanently inherit that SOP.
+  * Whenever the user points out a process improvement, missed pattern, or workflow preference, the agent **must immediately update `AGENTS.md`, `SPEC.md`, `DESIGN_SYSTEM.md`, `PLAYBOOK.md`, and/or `scripts/qa-check.mjs`** in the same turn so all future agents permanently inherit that SOP.
 
 ---
 
