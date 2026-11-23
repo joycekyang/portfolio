@@ -74,10 +74,10 @@ const firstSlide = slides[0];
                   data-video-src={fullSrc}
                 >
                   <iframe
-                    src={idx === 0 ? fullSrc : ''}
+                    src={fullSrc}
                     data-embed-src={fullSrc}
                     title={slide.alt}
-                    loading="lazy"
+                    loading="eager"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowfullscreen
                   />
@@ -97,7 +97,7 @@ const firstSlide = slides[0];
                     src={fullSrc}
                     alt={slide.alt}
                     class="carousel-img"
-                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    loading="eager"
                     fetchpriority={idx === 0 ? 'high' : 'auto'}
                     decoding="async"
                   />
@@ -214,11 +214,12 @@ const firstSlide = slides[0];
         currentIndex = (index + slides.length) % slides.length;
         track!.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
 
-        // Pause/reset any active embed iframe when leaving its slide
+        // Stop background audio when leaving a video slide, while keeping Figma/Slides embeds preloaded
         if (prevIndex !== currentIndex) {
           const prevIframe = slides[prevIndex]?.querySelector<HTMLIFrameElement>('iframe[data-embed-src]');
-          if (prevIframe && prevIframe.getAttribute('src')) {
-            prevIframe.setAttribute('src', '');
+          const embedSrc = prevIframe?.dataset.embedSrc || '';
+          if (prevIframe && /youtube\.com|drive\.google\.com/i.test(embedSrc)) {
+            prevIframe.setAttribute('src', embedSrc);
           }
         }
 
@@ -227,13 +228,6 @@ const firstSlide = slides[0];
         const nextCaption = activeSlide?.dataset.slideCaption || '';
         const nextExtUrl = activeSlide?.dataset.slideExtUrl || '';
         const nextExtLabel = activeSlide?.dataset.slideExtLabel || 'Open in New Tab';
-
-        // Lazy-load embed iframe only when the user actually navigates to this slide
-        const activeIframe = activeSlide?.querySelector<HTMLIFrameElement>('iframe[data-embed-src]');
-        if (activeIframe && !activeIframe.getAttribute('src')) {
-          const embedUrl = activeIframe.dataset.embedSrc || '';
-          if (embedUrl) activeIframe.setAttribute('src', embedUrl);
-        }
 
         if (labelEl) labelEl.textContent = nextLabel;
         if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${slides.length}`;
