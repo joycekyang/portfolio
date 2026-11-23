@@ -127,6 +127,9 @@
     "Wireframing",
     "wireframing"
   ],
+  "ignoreRegExpList": [
+    "/\\/(?:images|videos|resume)\\/[^\"'\\s)]+/g"
+  ],
   "ignorePaths": [
     "node_modules/**",
     "dist/**",
