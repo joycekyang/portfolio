@@ -50,7 +50,7 @@ const alignItems = alignMap[align] || 'center';
         data-caption={caption || alt}
         aria-label={`Click to enlarge: ${alt}`}
       >
-        <img src={imgSrc} alt={alt} class="media-split__img" loading="lazy" decoding="async" />
+        <img src={imgSrc} alt={alt} class="media-split__img" loading="eager" decoding="async" />
       </a>
       {caption && <figcaption class="media-split__caption">{caption}</figcaption>}
     </figure>
@@ -72,7 +72,7 @@ const alignItems = alignMap[align] || 'center';
         data-caption={caption || alt}
         aria-label={`Click to enlarge: ${alt}`}
       >
-        <img src={imgSrc} alt={alt} class="media-split__img" loading="lazy" decoding="async" />
+        <img src={imgSrc} alt={alt} class="media-split__img" loading="eager" decoding="async" />
       </a>
       {caption && <figcaption class="media-split__caption">{caption}</figcaption>}
     </figure>
