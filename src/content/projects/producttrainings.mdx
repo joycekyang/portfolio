@@ -30,6 +30,7 @@ meta:
   - label: "Timeline"
     value: "September – November 2026"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Problem
 
@@ -43,20 +44,44 @@ Designed and developed a scalable, multi-part e-learning experience tailored for
 2. **Visual Design & Generative AI Assets:** Paired Canva layouts with custom Generative AI visuals to speed up UI and product illustration production.
 3. **Interactive Prototype Development:** Built scenario-based branching interactions in Articulate Suite to enable self-paced, asynchronous mastery, eliminating 30 hours of repetitive live facilitation.
 
-## End-to-End Development Phases
+## Design Process
 
-* **Phase 1: Analysis (Needs Analysis · September 2026):**
-  * Collaborated with cross-functional subject matter experts across R&D, engineering, and manufacturing to scope core competencies and technical constraints.
-  * Structured modular units around adult learning and multimedia design principles.
-* **Phase 2: Design (Scriptwriting & Rapid Storyboarding · September – October 2026):**
-  * Authored scenario-driven branching scripts mirroring real-world friction points for technical and non-technical staff.
-  * Developed rapid low-to-high fidelity storyboards mapping UI interactions, decision branches, and knowledge checks.
-* **Phase 3: Development (Visual Design & Generative AI Assets · October 2026):**
-  * Established a cohesive visual design system using Canva for clean UI components, custom infographics, and iconography.
-  * Built a Generative AI image workflow to produce brand-aligned visual assets and product mockups.
-* **Phase 4: Prototyping & Iterative Testing:**
-  * Developed functional interactive prototypes in the Articulate Suite with variables and conditional branching.
-  * Completed thorough QA testing across every slide, verifying spelling, grammar, interactive triggers, and WCAG accessibility standards (POUR: Perceivable, Operable, Understandable, Robust).
-* **Phase 5: Implementation & Impact:**
-  * Deployed the final multi-part series across the company's LMS, tracking completion rates and interaction metrics.
-  * Streamlined onboarding, reducing live facilitation time by 30 hours for the training team.
+<ProcessAccordion
+  steps={[
+    {
+      title: "Analysis",
+      meta: "Needs Analysis",
+      bullets: [
+        "I met with SME and product trainer Jim, who onboards 5 to 10 new hires each month and needed post-training reinforcement for retention. We scoped three products into focused microtrainings assigned after live onboarding and available to current employees as refreshers."
+      ]
+    },
+    {
+      title: "Design",
+      meta: "Storyboarding",
+      bullets: [
+        "Each of the three products had its own 50-slide PowerPoint deck covering product features and details. I reviewed each deck to separate must-know details from nice-to-know context, cut what could be omitted, and flag content better suited for an infographic. From there, I built a structured storyboard mapping learning objectives, chunked content, knowledge checks, and the instructional plan, then reviewed it with Jim for alignment and sign-off."
+      ]
+    },
+    {
+      title: "Development",
+      meta: "Visual Design & Generative AI Assets",
+      bullets: [
+        "I built the modules in Articulate Storyline using custom navigation and custom variables. To ground the learning in real context, I created an opening video introducing the character learners follow as they explore each product."
+      ]
+    },
+    {
+      title: "Implementation",
+      meta: "Bridge LMS Deployment",
+      bullets: [
+        "I published and rolled out the microtrainings to learners through Bridge LMS so new hires and tenured staff could access them on demand."
+      ]
+    },
+    {
+      title: "Evaluation",
+      meta: "LMS Deployment & Assessment Data Review",
+      bullets: [
+        "I reviewed assessment data to spot frequently missed versus correctly answered questions, using those item trends to guide future updates to the course."
+      ]
+    }
+  ]}
+/>

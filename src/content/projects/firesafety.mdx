@@ -3,7 +3,7 @@ title: "Fire Safety"
 subtitle: "Articulate Storyline eLearning Course"
 category: "lxd"
 order: 1
-description: "This hands-on Fire Extinguisher Training equips employees with the confidence and skills to respond fast in the critical first moments of a fire, covering extinguisher types, the PASS technique, and real decision-making on when to fight a fire versus when to evacuate. Interactive and practical, this session turns nervous bystanders into capable first responders."
+description: "This hands-on, OSHA-aligned Fire Extinguisher Training equips employees with the confidence and skills to respond fast in the critical first moments of a fire. Covering extinguisher classes, the PASS technique, and real-world decision-making on when to fight a fire versus when to evacuate, this interactive course meets federal safety standards (29 CFR 1910.157) while turning nervous bystanders into capable first responders."
 image: "/images/projects/firesafety/hero-mockup.png"
 imageAlt: "Screenshot of Fire Extinguisher Training interactive course"
 tags:
@@ -13,6 +13,15 @@ tags:
 ctaLabel: "View Case Study Details"
 launchUrl: "https://joycekyang.github.io/FireSafetyTraining/"
 launchLabel: "Launch Experience"
+videoEmbeds:
+  - src: "https://embed.figma.com/design/eX6IQPMrNssy4Jr8L8PYzO/Fire-Extinguisher-Training-Wireframes?node-id=0-1&embed-host=share"
+    title: "Interactive Figma Wireframes"
+    aspect: "landscape"
+    caption: "Interactive Figma file: zoom in and pan around to explore the full Fire Extinguisher Training wireframes closely."
+  - src: "https://drive.google.com/file/d/1sNNZe41T4CcBpPAkuEFqLv3gUj9wwibm/preview"
+    title: "Fire Safety Course Learning Analytics"
+    aspect: "landscape"
+    caption: "Fire Safety eLearning Course Assessment Analytics, which helps spot confusing items, enrollment status, and completion rates."
 meta:
   - label: "Audience"
     value: "300+ employees across clinical, engineering, R&D, manufacturing, and more."
@@ -34,33 +43,138 @@ gallery:
   - src: "/images/projects/firesafety/screen-3.png"
     alt: "Contextual knowledge check slide layer pop-up for the PASS technique"
     caption: "Contextual Slide-Layer Knowledge Check Pop-Up"
+  - src: "/images/projects/firesafety/knowledge-check.png"
+    alt: "Ungraded knowledge checks to prepare learners for the final assessment"
+    caption: "Ungraded Knowledge Checks for Final Assessment Preparation"
   - src: "/images/projects/firesafety/screen-4.png"
     alt: "Module menu showing 7-badge progression and Storyline downloadable resources dropdown"
     caption: "Module Menu with 7-Badge Progression & Downloadable Resources Panel"
+  - src: "/images/projects/firesafety/articulatefire.png"
+    alt: "Fire Safety course developed in Articulate Storyline"
+    caption: "Fire Safety course developed in Articulate Storyline"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
+import MediaSplit from '../../components/MediaSplit.astro';
 
-## Overview & Process
+## Overview
 
-There was a need for an interactive asynchronous Fire Safety eLearning course designed to educate employees on fire prevention, emergency procedures, evacuation protocols, and proper use of fire extinguishers. Collaborating with Subject Matter Expert John Malveaux, my task was to design and develop an effective training course that increased awareness of fire safety practices, reinforced key concepts, and assessed understanding.
+To meet mandatory OSHA workplace safety standards (29 CFR 1910.157 and 1910.38), the organization needed an interactive asynchronous Fire Safety eLearning course to educate employees on fire prevention, emergency procedures, evacuation protocols, and proper fire extinguisher use. Collaborating with Subject Matter Expert John Malveaux, my task was to design and develop a scalable compliance course that increased awareness of fire safety practices, reinforced critical response steps, and formally assessed employee understanding.
 
-1. **Analysis & Instructional Framework:** Grounded the curriculum in Gagné’s Nine Events of Instruction to scaffold skill acquisition and Keller’s ARCS Model to sustain learner motivation and build confidence under pressure.
-2. **Storyboarding & Scripting:** Authored scenario-based dialogue, branching decision points, and practical remediation scripts targeting authentic workplace fire risks.
-3. **Visual Asset Production:** Produced custom visual assets and realistic emergency environments using Generative AI and Figma wireframes to structure screen layouts and organize storyboard content.
-4. **Interactive Prototyping & Development:** Developed the module in Articulate Storyline 360, engineering immersive simulations, click-and-reveal knowledge checks, and custom feedback variables based on Adult Learning Theory.
-5. **Quality Assurance & Evaluation:** Collaborated with Subject Matter Expert John Malveaux to conduct alignment reviews and usability testing, ensuring seamless navigation, WCAG accessibility, and measurable retention of the PASS framework.
+## Design Process
 
-## Visual Direction & Design Rationale
+<ProcessAccordion
+  steps={[
+    {
+      title: "Analysis",
+      meta: "Needs Analysis",
+      description:
+        "Conducted needs analysis with the Health and Safety Officer, John to uncover needs for this course. Learned that the organization needed a self-paced, asynchronous course to meet OSHA compliance standards and reduce live training time. Identified the target audience, learning objectives, and key content areas to be covered in the course.",
+    },
+    {
+      title: "Design",
+      meta: "Storyboarding & Scripting",
+      description:
+        "Authored scenario-based dialogue, branching decision points, and practical remediation scripts targeting authentic workplace fire risks.",
+      embedUrl:
+        "https://docs.google.com/document/d/1_kLiIrwD1oP4JYS3xXGYLMRH1NS95eaJJm64AnAfAJo/preview",
+      embedTitle: "Fire Safety eLearning Storyboard Document",
+      embedCaption:
+        "Scroll through the full Fire Safety storyboard and branching script.",
+      embedHeight: "500px",
+    },
+    {
+      title: "Development",
+      meta: "Asset Creation, Prototyping, & Authoring",
+      bullets: [
+        "Developed the visual look and feel of the course, create a library of custom visual assets and realistic emergency environments using Canva and Generative AI.",
+        "Prototyped the course in Figma to validate the branching flow, knowledge checks, and interactive elements before final development in Articulate Storyline 360.",
+        "Developed the module in Articulate Storyline 360, engineering immersive simulations, click-and-reveal knowledge checks, and a variety of custom variables for feedback, interactive elements and scenarios.",
+        "Develop and embed a one-pager quick reference guide to reinforce knowledge retention and provide a practical resource for learners to use in the workplace.",
+        "Collaborated with Subject Matter Expert John Malveaux to conduct alignment reviews and usability testing, ensuring seamless navigation, WCAG accessibility, and measurable retention of the PASS framework. Develop and embed 1 pager to increase knowledge retention and provide a quick reference for learners to use in the workplace."
+      ],
+      embedUrl:
+        "https://embed.figma.com/design/eX6IQPMrNssy4Jr8L8PYzO/Fire-Extinguisher-Training-Wireframes?node-id=0-1&embed-host=share",
+      embedTitle: "Interactive Fire Extinguisher Training Figma Wireframes",
+      embedCaption:
+        "Interactive Figma wireframes: zoom in and pan around to explore the full storyboard layout.",
+      embedHeight: "460px",
+    },
+    {
+      title: "Implementation",
+      meta: "LMS Deployment & Rollout",
+      description: "Download the SCORM file in Storyline and upload the course to the Bridge LMS. Assign course to manufacturing, R&D, clinical, and engineering employees. Conduct QA testing to ensure the course functions correctly across devices and browsers.",
+      image: "/images/projects/firesafety/articulatefire.png",
+      imageAlt: "Fire Safety course published in Articulate Storyline",
+      imageCaption: "Fire Safety course built and packaged in Articulate Storyline",
+      imagePosition: "below",
+    },
+    {
+      title: "Evaluation",
+      meta: "Assessment Analysis",
+      description: "Analyze learner analytics and item-level assessment reports to identify knowledge gaps and refine course content for improved comprehension and retention.",
+      embedUrl: "https://drive.google.com/file/d/1sNNZe41T4CcBpPAkuEFqLv3gUj9wwibm/preview",
+      embedTitle: "Fire Safety Course Learning Analytics",
+      embedCaption: "Fire Safety eLearning Course Assessment Analytics, which helps spot confusing items, enrollment status, and completion rates.",
+      embedHeight: "420px",
+    },
+  ]}
+/>
+
+## Knowledge Checks
+
+<MediaSplit
+  src="/images/projects/firesafety/knowledge-check.png"
+  alt="Ungraded knowledge checks to prepare learners for the final assessment"
+  caption="Ungraded knowledge checks to prepare learners for the final assessment"
+  side="right"
+  imageWidth="44%"
+  offsetTop="4px"
+  wrap={true}
+>
+Interactive branching scenarios put learners right into realistic emergency choices. Click and reveal activities break down the PASS technique, 
+while custom variables track decisions. Quick knowledge checks at the end of each section give instant feedback through slide layers before the 
+final graded assessment.
+
+## Retention
+
+* **Downloadable Resources:** Learners get a take-home one-pager directly inside the Articulate resources panel.
+* **Site-Specific Guides:** Extra reference materials are available for download to support ongoing knowledge retention.
+
+</MediaSplit>
+
+
+
+## Impact
+
+By handling end-to-end ADDIE development, UX design, and responsive authoring for 300+ learners in Bridge LMS, this course saved 92 hours annually in live compliance training. Success here also secured stakeholder buy-in for a pipeline of 34 future training modules.
+
+Moving away from passive compliance toward active scenario practice made a real difference. Using Gagné's Nine Events kept complex steps clear without overloading learners, and the bold Neobrutalist design gave the interface strong scannability. Close teamwork with the SME and custom visual assets helped build a simulation that genuinely builds confidence under pressure.
+
+## Design Style
 
 * **Meeting the SME Vision:** During initial discovery, John was clear that he wanted to avoid typical corporate blues and grays, aiming instead for something visually bold and memorable that grabs attention right away.
 * **Unambiguous Tactile Affordance:** The module relies on quick decisions and frequent interaction. Neobrutalism uses thick strokes and hard, sticker-style drop shadows to make buttons, hotspots, and clickable cards feel like physical objects you can press, eliminating guesswork about what is clickable.
 * **Sharp Scannability and Hierarchy:** Using a high-contrast base with solid electric accents helps content containers stand out clearly, allowing learners to instantly distinguish between scenario storylines and actual controls.
 * **Balancing Playfulness with Clean Function:** The design adds a modern, energetic feel without sacrificing accessibility or usability, creating an engaging learning space that feels purposeful rather than routine.
 
-## Interactive Features & Performance Support
+## Storyline Features Implemented
 
+<MediaSplit
+  src="/images/projects/firesafety/screen-4.png"
+  alt="Module menu showing 7-badge progression and Storyline downloadable resources dropdown"
+  caption="Module Menu with 7-Badge Progression & Downloadable Resources Panel"
+  side="right"
+  imageWidth="44%"
+  offsetTop="4px"
+  wrap={true}
+>
 * **Interactive Branching Scenarios:** Placed learners directly into realistic emergency decision points to build situational judgment.
 * **Click and Reveal Activities:** Broke down complex steps like the PASS technique into manageable, interactive actions.
 * **Custom Variables and Badging:** Tracked learner progression and performance across slides. Once a learner completes a module, they earn a badge. Locked button states require learners to explore mandatory content before moving forward, and collecting all badges unlocks full progression.
 * **Dynamic Button States:** Provided clear hover, selected, and visited feedback that matches the Neobrutalist design system.
 * **Contextual Layer Feedback:** Triggered immediate, slide-layer pop-ups during end-of-module knowledge checks so learners understand the reasoning behind correct answers and remediation steps before proceeding.
-* **Downloadable Resources & Site-Specific Guides:** Learners get a take-home one-pager and extra reference materials directly inside the Articulate resources panel to support ongoing knowledge retention.
+</MediaSplit>
+
+## LMS Data & Assessment Analysis
+
+Beyond course launch, I regularly analyze learner analytics and item-level assessment reports in Bridge LMS to evaluate instructional effectiveness. By tracking completion rates and pinpointing which quiz questions learners repeatedly miss, I identify knowledge gaps, clarify ambiguous wording, and continuously refine course content to improve comprehension and retention.

@@ -3,7 +3,7 @@ title: "Billing Training"
 subtitle: "Esker Billing · Video Development and Articulate Storyline"
 category: "lxd"
 order: 2
-description: "Comprehensive billing training module designed to streamline financial workflows, enhance procedural accuracy, and guide team members through complex billing systems efficiently, transitioning live training to an asynchronous model and saving 20 weekly live training hours."
+description: "Comprehensive billing training module designed to streamline financial workflows for 81 employees within the accounts payable department, enhance procedural accuracy, and guide team members through complex billing systems efficiently, transitioning live training to an asynchronous model and saving 20 weekly live training hours."
 image: "/images/projects/billingtraining/hero-mockup.png"
 imageAlt: "Screenshot of Esker Billing Platform Training mockups"
 tags:
@@ -39,6 +39,7 @@ gallery:
   - src: "/images/projects/billingtraining/workflow-overview.png"
     alt: "Esker Billing vendor registration and approval workflow visual overview"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Situation & Challenge
 
@@ -48,9 +49,37 @@ The Enterprise Enablement team spent over 20 hours weekly on repetitive live onb
 
 Designed and deployed a scalable, self-paced learning and performance support solution to eliminate recurring live retraining, transition procedural training to an asynchronous model, and recapture ~80 hours/month of trainer time. Developed video demonstrations for both Vendor Registration and Approval flows for the accounts payable department.
 
-## Design Process & Execution
+## Design Process
 
-1. **Analysis Phase:** Conducted a discovery call with the client to review and refine the script based on their standard training practices and real-world workflows.
-2. **Design Phase:** Mapped and designed individual screen layouts to establish visual hierarchy, user flow, and optimal cognitive engagement before production.
-3. **Development & Production:** Extracted precise screenshot images matching system aspect ratios and built out video demonstrations inside the Canva video editor. Generated professional narration using voice-over tools aligned to the script.
-4. **Integration & Implementation:** Embedded the finalized video demonstrations into the Articulate Storyline file, incorporating interactive checks, and successfully deployed the module into the LMS for employee access.
+<ProcessAccordion
+  steps={[
+    {
+      title: "Analysis",
+      meta: "Needs Analysis",
+      bullets: [
+        "Conducted discovery call with the SME/Client who was the accounts payable trainer to uncover context around audience, goals, and pain points. Learned that the client needed this previously live course to be converted into an on-demand eLearning course. Communicated the course development plan to the SME/Client."
+      ]
+    },
+    {
+      title: "Design",
+      meta: "Scriptwriting",
+      bullets: [
+        "Utilized a recorded sample of the live training into storyboard script and ran the script by with the SME/Client for feedback and approval. Incorporated SME/Client feedback into the final script."
+      ]
+    },
+    {
+      title: "Development",
+      meta: "Visual Design & Generative AI Assets",
+      bullets: [
+        "Convert script from speech to text and request access to Esker Billing Platform to collect visual assets for the video demonstration portion. Develop video demonstration in Canva Video, using animated mouse interactions and custom callouts of the key steps."
+      ]
+    },
+    {
+      title: "Implementation",
+      meta: "Bridge LMS Deployment",
+      bullets: [
+        "Deployed the final multi-part series across the company's LMS."
+      ]
+    },
+  ]}
+/>

@@ -34,18 +34,43 @@ gallery:
   - src: "/images/projects/camtasia/powerpoint-assets.gif"
     alt: "Custom visual asset creation in PowerPoint"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Project Overview
 
 This project involved the creation of a high-fidelity instructional video designed to simplify complex concepts through a combination of visual storytelling and audio narration. I managed the entire production lifecycle, from initial ideation to final rendering.
 
-## Process
+## Design Process
 
-* **Pre-Production & Storyboarding:** I began by drafting a script and storyboard. This phase was critical for mapping out the learner’s journey and ensuring that the visual pacing matched the instructional narrative.
-* **Asset Creation:** Using PowerPoint, I designed custom visual backgrounds, headers, and key imagery. I focused on "Visual Problem Solving," creating assets that were not only aesthetically pleasing but also optimized for information delivery.
-* **Screen Recording & Demonstration:** I filmed a series of screencasts demonstrating the practical application of Clipping Masks in Adobe Photoshop. I recorded two separate videos to showcase different workflows: one focused on using keyboard shortcuts for efficiency and the other on walking through the Menu Bar (`Layer > Create Clipping Mask/Vector Mask`). These recordings featured real-time narration and screen sharing to provide clear, step-by-step guidance.
-* **Asset Management:** I imported the custom slides, screencasts, and graphics, along with background music, into the Camtasia Media Bin. Assets were strategically layered across the Tracks to establish pacing and structure.
-* **Audio Editing:** I performed audio editing to ensure a seamless listening experience. This included precision cutting of the musical score to fit specific segments of the video and the strategic application of "Fade In" and "Fade Out" effects. These transitions were used to create a professional auditory flow, ensuring the music complemented the narration without distracting from the instructional content.
+<ProcessAccordion
+  steps={[
+    {
+      title: "Pre-Production & Storyboarding",
+      description:
+        "I began by drafting a script and storyboard. This phase was critical for mapping out the learner’s journey and ensuring that the visual pacing matched the instructional narrative.",
+    },
+    {
+      title: "Asset Creation",
+      description:
+        'Using PowerPoint, I designed custom visual backgrounds, headers, and key imagery. I focused on "Visual Problem Solving," creating assets that were not only aesthetically pleasing but also optimized for information delivery.',
+    },
+    {
+      title: "Screen Recording & Demonstration",
+      description:
+        "I filmed a series of screencasts demonstrating the practical application of Clipping Masks in Adobe Photoshop. I recorded two separate videos to showcase different workflows: one focused on using keyboard shortcuts for efficiency and the other on walking through the Menu Bar (Layer > Create Clipping Mask/Vector Mask). These recordings featured real-time narration and screen sharing to provide clear, step-by-step guidance.",
+    },
+    {
+      title: "Asset Management",
+      description:
+        "I imported the custom slides, screencasts, and graphics, along with background music, into the Camtasia Media Bin. Assets were strategically layered across the Tracks to establish pacing and structure.",
+    },
+    {
+      title: "Audio Editing",
+      description:
+        'I performed audio editing to ensure a seamless listening experience. This included precision cutting of the musical score to fit specific segments of the video and the strategic application of "Fade In" and "Fade Out" effects. These transitions were used to create a professional auditory flow, ensuring the music complemented the narration without distracting from the instructional content.',
+    },
+  ]}
+/>
 
 ## Takeaways
 

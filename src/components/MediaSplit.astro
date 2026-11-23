@@ -1,0 +1,268 @@
+---
+import { withBase } from '../utils/url';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  side?: 'right' | 'left';
+  align?: 'top' | 'center' | 'bottom';
+  imageWidth?: string;
+  offsetTop?: string;
+  sticky?: boolean;
+  wrap?: boolean;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  side = 'right',
+  align = 'center',
+  imageWidth = '44%',
+  offsetTop,
+  sticky = false,
+  wrap = false,
+} = Astro.props;
+
+const imgSrc = withBase(src);
+const alignMap = {
+  top: 'start',
+  center: 'center',
+  bottom: 'end',
+};
+const alignItems = alignMap[align] || 'center';
+---
+
+<div
+  class={`media-split media-split--${side} ${wrap ? 'media-split--wrap' : ''}`}
+  style={`--media-width: ${imageWidth}; --media-align: ${alignItems}; ${offsetTop ? `--media-offset-top: ${offsetTop};` : ''}`}
+>
+  {wrap && (
+    <figure class="media-split__figure media-split__figure--float">
+      <a
+        href={imgSrc}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="media-split__link gallery-zoom-trigger"
+        data-full-src={imgSrc}
+        data-alt={alt}
+        data-caption={caption || alt}
+        aria-label={`Click to enlarge: ${alt}`}
+      >
+        <img src={imgSrc} alt={alt} class="media-split__img" loading="lazy" decoding="async" />
+      </a>
+      {caption && <figcaption class="media-split__caption">{caption}</figcaption>}
+    </figure>
+  )}
+
+  <div class="media-split__text">
+    <slot />
+  </div>
+
+  {!wrap && (
+    <figure class={`media-split__figure ${sticky ? 'media-split__figure--sticky' : ''}`}>
+      <a
+        href={imgSrc}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="media-split__link gallery-zoom-trigger"
+        data-full-src={imgSrc}
+        data-alt={alt}
+        data-caption={caption || alt}
+        aria-label={`Click to enlarge: ${alt}`}
+      >
+        <img src={imgSrc} alt={alt} class="media-split__img" loading="lazy" decoding="async" />
+      </a>
+      {caption && <figcaption class="media-split__caption">{caption}</figcaption>}
+    </figure>
+  )}
+</div>
+
+<style>
+  .media-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, var(--media-width, 44%));
+    gap: 32px;
+    align-items: var(--media-align, center);
+    margin: 18px 0 28px 0;
+  }
+
+  .media-split--left {
+    grid-template-columns: minmax(240px, var(--media-width, 44%)) minmax(0, 1fr);
+  }
+
+  .media-split--left .media-split__figure {
+    order: -1;
+  }
+
+  /* Editorial text-wrap mode: image sits on the side, remaining text flows full-width underneath */
+  .media-split--wrap {
+    display: flow-root;
+  }
+
+  .media-split--wrap .media-split__figure--float {
+    float: right;
+    width: var(--media-width, 44%);
+    margin: var(--media-offset-top, 0) 0 20px 32px;
+  }
+
+  .media-split--wrap.media-split--left .media-split__figure--float {
+    float: left;
+    margin: var(--media-offset-top, 0) 32px 20px 0;
+  }
+
+  .media-split__text :global(p:last-child),
+  .media-split__text :global(ul:last-child),
+  .media-split__text :global(ol:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Match flat cobalt editorial list styling when bullets sit inside MediaSplit */
+  .media-split__text > :global(ul),
+  .media-split__text > :global(ol) {
+    list-style: none;
+    padding-left: 0;
+    margin: 12px 0 18px 0;
+  }
+
+  .media-split__text > :global(ol) {
+    counter-reset: split-step;
+  }
+
+  .media-split__text > :global(ul > li),
+  .media-split__text > :global(ol > li) {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 24px;
+  }
+
+  .media-split__text > :global(ul > li:last-child),
+  .media-split__text > :global(ol > li:last-child) {
+    margin-bottom: 0;
+  }
+
+  .media-split__text > :global(ul > li::before) {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+  }
+
+  .media-split__text > :global(ol > li) {
+    counter-increment: split-step;
+    padding-left: 30px;
+  }
+
+  .media-split__text > :global(ol > li::before) {
+    content: counter(split-step) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-heading);
+    font-size: 0.96rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-blue);
+  }
+
+  .media-split__text > :global(ul > li > strong:first-child),
+  .media-split__text > :global(ol > li > strong:first-child) {
+    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  .media-split__text :global(li ul),
+  .media-split__text :global(li ol) {
+    margin: 10px 0 2px 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+
+  .media-split__text :global(li ul li),
+  .media-split__text :global(li ol li) {
+    margin-bottom: 6px;
+    padding: 0;
+  }
+
+  .media-split__text :global(li ul li strong:first-child),
+  .media-split__text :global(li ol li strong:first-child) {
+    color: var(--primary-blue);
+  }
+
+  .media-split__figure {
+    margin: var(--media-offset-top, 0) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .media-split__figure--sticky {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+
+  .media-split__link {
+    display: block;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: zoom-in;
+  }
+
+  .media-split__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(51, 33, 255, 0.12);
+    border-color: rgba(51, 33, 255, 0.25);
+  }
+
+  .media-split__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .media-split__caption {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 0 4px;
+  }
+
+  @media (max-width: 860px) {
+    .media-split,
+    .media-split--left {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .media-split--left .media-split__figure {
+      order: 0;
+    }
+
+    .media-split__figure {
+      margin-top: 0;
+    }
+
+    .media-split__figure--sticky {
+      position: static;
+    }
+
+    .media-split--wrap .media-split__figure--float,
+    .media-split--wrap.media-split--left .media-split__figure--float {
+      float: none;
+      width: 100%;
+      margin: 0 0 20px 0;
+    }
+  }
+</style>

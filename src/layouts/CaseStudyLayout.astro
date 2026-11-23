@@ -36,6 +36,7 @@ const {
 } = project.data;
 
 const isUxdFlow = category === 'uxd';
+const useAccentLists = category === 'lxd';
 
 const carouselSlides: CarouselSlide[] = [
   ...(isUxdFlow
@@ -205,7 +206,7 @@ const backLink = backMap[category];
       <!-- Markdown Case Study Body (Overview & Details) -->
       <div
         id={!isUxdFlow && carouselSlides.length === 0 ? 'case-study-next' : undefined}
-        class="case-study-prose case-study-chapter"
+        class={`case-study-prose case-study-chapter ${useAccentLists ? 'case-study-prose--accent-lists' : ''}`}
         data-scroll-reveal
       >
         <slot />
@@ -802,6 +803,84 @@ const backLink = backMap[category];
   .case-study-prose :global(strong) {
     color: var(--text-pure-black);
     font-weight: 700;
+  }
+
+  /* Clean Flat Editorial Lists for Static LXD Content */
+  .case-study-prose--accent-lists > :global(ul),
+  .case-study-prose--accent-lists > :global(ol) {
+    list-style: none;
+    padding-left: 0;
+    margin: 14px 0 28px 0;
+  }
+
+  .case-study-prose--accent-lists > :global(ol) {
+    counter-reset: step-counter;
+  }
+
+  .case-study-prose--accent-lists > :global(ul > li),
+  .case-study-prose--accent-lists > :global(ol > li) {
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 26px;
+  }
+
+  .case-study-prose--accent-lists > :global(ul > li:last-child),
+  .case-study-prose--accent-lists > :global(ol > li:last-child) {
+    margin-bottom: 0;
+  }
+
+  .case-study-prose--accent-lists > :global(ul > li::before) {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+  }
+
+  .case-study-prose--accent-lists > :global(ol > li) {
+    counter-increment: step-counter;
+    padding-left: 32px;
+  }
+
+  .case-study-prose--accent-lists > :global(ol > li::before) {
+    content: counter(step-counter) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-heading);
+    font-size: 0.96rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-blue);
+  }
+
+  .case-study-prose--accent-lists > :global(ul > li > strong:first-child),
+  .case-study-prose--accent-lists > :global(ol > li > strong:first-child) {
+    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  .case-study-prose--accent-lists :global(li ul),
+  .case-study-prose--accent-lists :global(li ol) {
+    margin: 10px 0 2px 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+
+  .case-study-prose--accent-lists :global(li ul li),
+  .case-study-prose--accent-lists :global(li ol li) {
+    margin-bottom: 6px;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .case-study-prose--accent-lists :global(li ul li strong:first-child),
+  .case-study-prose--accent-lists :global(li ol li strong:first-child) {
+    color: var(--primary-blue);
   }
 
   /* Gallery */

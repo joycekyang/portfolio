@@ -45,10 +45,21 @@ gallery:
   - src: "/images/projects/accessibilityauditadventure/screen-9.png"
     alt: "Slide layers and star points progression feedback"
 ---
+import MediaSplit from '../../components/MediaSplit.astro';
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Overview
 
+<MediaSplit
+  src="/images/projects/accessibilityauditadventure/screen-1.png"
+  alt="Accessibility Audit Adventure title screen"
+  caption="Image of the 4 Islands of Accessibility Audit Adventure: Perceivable, Operable, Understandable, and Robust"
+  side="right"
+  align="center"
+  imageWidth="44%"
+>
 The **Accessibility Audit Adventure** is an immersive micro-learning experience designed to demystify the complexities of digital accessibility for visual designers, instructional designers, and UX/UI students. By utilizing a "cozy-game" aesthetic, the course transforms the often-intimidating Web Content Accessibility Guidelines (WCAG) into an engaging island exploration. Learners navigate through the four pillars of accessibility (**Perceivable, Operable, Understandable, and Robust**, or POUR) in a supportive, low-stress environment that prioritizes practical application over rote memorization.
+</MediaSplit>
 
 * **Island One (Perceivable):** Focuses on the principle that information must be able to be seen or heard. The learner proposes that clear, icon-based signage will help the goats (who are red-green colorblind) distinguish between safe and poisonous foods.
 * **Island Two (Operable):** Focuses on ensuring interfaces are navigable. The snakes on this island only have stairs, which are inaccessible due to their lack of legs. Learners must propose that universal ramps be added to help with mobility for all.
@@ -57,6 +68,15 @@ The **Accessibility Audit Adventure** is an immersive micro-learning experience 
 
 ## Storyline Features Implemented
 
+<MediaSplit
+  src="/images/projects/accessibilityauditadventure/screen-5.png"
+  alt="Island Two: Operable universal ramp navigation scenario"
+  caption="Island Two: Operable universal ramp navigation scenario"
+  side="right"
+  imageWidth="44%"
+  offsetTop="4px"
+  wrap={true}
+>
 1. **Custom Variables & Progression:** Some Next buttons are locked until the learner interacts with the screen (for example, `Char_Select` requires entering a name and choosing a character). Custom variables track Character Selection, Stars (points) collected, Visited Islands, and Visited Terminology to keep learners motivated and engaged.
 2. **Custom Map Navigation:** Custom navigation developed with dynamic object states. Early on, the learner learns how the navigation works and can always return to any island slide using the interactive Map Icon menu.
 3. **Modular Slide Layers:** To lower cognitive load and prevent visual clutter, interactions are organized into separate Storyline Slide Layers rather than crowding instructions, feedback, and scenario states onto a single base timeline:
@@ -68,3 +88,43 @@ The **Accessibility Audit Adventure** is an immersive micro-learning experience 
 5. **Audio Sound Effects & Distinct Character Voices:**
    * **Synced Sound Effects:** Layered subtle sound effects, such as the sound of heavy stone shifting into place, synced directly with the JavaScript rotation triggers.
    * **Distinct Character Voices:** Each character has a distinct, conversational voice with natural pacing and tone so learners can easily tell who is speaking.
+</MediaSplit>
+## Design Process
+
+<ProcessAccordion
+  steps={[
+    {
+      title: "Analysis",
+      meta: "Baseline Audit & Gap Analysis",
+      bullets: [
+        "Analyzed baseline WebAIM knowledge across a sample of 30 people to pinpoint current skill gaps ahead of a Spring 2027 readiness target, then scoped a targeted learning solution to close that gap."
+      ]
+    },
+    {
+      title: "Design",
+      meta: "Branching Storyboard & Architecture",
+      bullets: [
+        "Designed a storyboard featuring an introductory hook video sequence and four branching scenarios covering Perceivable, Operable, Understandable, and Robust, each paired with an animal character facing an accessibility issue learners audit and solve.",
+        "Structured each island with mini-games, scenario videos, simulations, and a knowledge check, awarding four stars for completing all islands followed by a final graded quiz, with custom variables planned to greet learners with a welcome-back message when they revisit an island."
+      ]
+    },
+    {
+      title: "Development",
+      meta: "Interactive Build & Media Production",
+      bullets: [
+        "Built the interactive experience and custom variable logic while producing the introductory hook video, scenario videos, mini-games, and simulations to bring each island to life."
+      ]
+    },
+    {
+      title: "Implementation",
+      meta: "DevLearn DemoFest Showcase",
+      bullets: [
+        "Presented the interactive course live at DevLearn DemoFest, gathering feedback from attendees and learning professionals on the branching flow, mini-games, and accessibility mechanics."
+      ],
+      image: "/images/projects/accessibilityauditadventure/AAAdemofest.png",
+      imageAlt: "Joyce presenting Accessibility Audit Adventure at DevLearn DemoFest",
+      imageCaption: "Presenting Accessibility Audit Adventure at DevLearn DemoFest",
+      imageWidth: "40%"
+    }
+  ]}
+/>

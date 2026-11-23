@@ -1,0 +1,504 @@
+---
+import { withBase } from '../utils/url';
+
+export interface ProcessStep {
+  title: string;
+  meta?: string;
+  text?: string;
+  description?: string;
+  bullets?: string[];
+  image?: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  imageWidth?: string;
+  imagePosition?: 'right' | 'below';
+  embedUrl?: string;
+  embedTitle?: string;
+  embedCaption?: string;
+  embedHeight?: string;
+}
+
+interface Props {
+  steps: ProcessStep[];
+  ariaLabel?: string;
+}
+
+const { steps, ariaLabel = 'Design Process Steps' } = Astro.props;
+---
+
+<div class="process-accordion" data-process-accordion role="region" aria-label={ariaLabel}>
+  <div class="process-toolbar">
+    <span class="process-count">{steps.length} Phases</span>
+    <button type="button" class="process-toggle-all" data-toggle-all aria-pressed="false">
+      Expand all
+    </button>
+  </div>
+
+  <div class="process-list">
+    {
+      steps.map((step, idx) => {
+        const isOpen = idx === 0;
+        const panelId = `process-panel-${idx}-${step.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        return (
+          <div class="process-item" data-process-item data-open={isOpen ? 'true' : 'false'}>
+            <button
+              type="button"
+              class="process-trigger"
+              data-process-trigger
+              aria-expanded={isOpen ? 'true' : 'false'}
+              aria-controls={panelId}
+            >
+              <span class="process-badge" aria-hidden="true">
+                {idx + 1}
+              </span>
+              <span class="process-header-text">
+                <span class="process-title">{step.title}</span>
+                {step.meta && <span class="process-meta">{step.meta}</span>}
+              </span>
+              <span class="process-chevron" aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </button>
+
+            <div class="process-panel" id={panelId} role="region">
+              <div
+                class={`process-panel-inner ${step.image && step.imagePosition !== 'below' ? 'process-panel-inner--with-media' : ''}`}
+                style={step.imageWidth ? `--step-img-width: ${step.imageWidth};` : undefined}
+              >
+                <div class="process-copy">
+                  {(step.text || step.description) && (
+                    <p class="process-desc">{step.text || step.description}</p>
+                  )}
+                  {step.bullets && step.bullets.length === 1 && !(step.text || step.description) ? (
+                    <p class="process-desc">{step.bullets[0]}</p>
+                  ) : (
+                    step.bullets &&
+                    step.bullets.length > 0 && (
+                      <ul class="process-bullets">
+                        {step.bullets.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    )
+                  )}
+                </div>
+
+                {step.image && (
+                  <figure
+                    class={`process-media ${step.imagePosition === 'below' ? 'process-media--below' : ''}`}
+                    style={step.imagePosition === 'below' && step.imageWidth ? `max-width: ${step.imageWidth};` : undefined}
+                  >
+                    <a
+                      href={withBase(step.image)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="process-media-link gallery-zoom-trigger"
+                      data-full-src={withBase(step.image)}
+                      data-alt={step.imageAlt || step.title}
+                      data-caption={step.imageCaption || step.imageAlt || step.title}
+                      aria-label={`Click to enlarge: ${step.imageAlt || step.title}`}
+                    >
+                      <img
+                        src={withBase(step.image)}
+                        alt={step.imageAlt || step.title}
+                        class="process-media-img"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </a>
+                    {step.imageCaption && (
+                      <figcaption class="process-media-caption">{step.imageCaption}</figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {step.embedUrl && (
+                  <figure class="process-embed">
+                    <div
+                      class="process-embed-frame"
+                      style={step.embedHeight ? `--step-embed-height: ${step.embedHeight};` : undefined}
+                    >
+                      <iframe
+                        src={step.embedUrl}
+                        title={step.embedTitle || `${step.title} Interactive Embed`}
+                        loading="eager"
+                        allow="fullscreen"
+                        allowfullscreen
+                      />
+                    </div>
+                    {step.embedCaption && (
+                      <figcaption class="process-media-caption">{step.embedCaption}</figcaption>
+                    )}
+                  </figure>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script>
+  function initProcessAccordions() {
+    const accordions = document.querySelectorAll<HTMLElement>('[data-process-accordion]');
+    accordions.forEach((accordion) => {
+      if (accordion.dataset.initialized === 'true') return;
+      accordion.dataset.initialized = 'true';
+
+      const items = Array.from(accordion.querySelectorAll<HTMLElement>('[data-process-item]'));
+      const toggleAllBtn = accordion.querySelector<HTMLButtonElement>('[data-toggle-all]');
+
+      function syncToggleAllLabel() {
+        if (!toggleAllBtn) return;
+        const allOpen = items.every((item) => item.dataset.open === 'true');
+        toggleAllBtn.textContent = allOpen ? 'Collapse all' : 'Expand all';
+        toggleAllBtn.setAttribute('aria-pressed', allOpen ? 'true' : 'false');
+      }
+
+      function setItemState(item: HTMLElement, open: boolean) {
+        item.dataset.open = open ? 'true' : 'false';
+        const trigger = item.querySelector<HTMLButtonElement>('[data-process-trigger]');
+        trigger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      items.forEach((item) => {
+        const trigger = item.querySelector<HTMLButtonElement>('[data-process-trigger]');
+        trigger?.addEventListener('click', () => {
+          const currentlyOpen = item.dataset.open === 'true';
+          setItemState(item, !currentlyOpen);
+          syncToggleAllLabel();
+        });
+      });
+
+      toggleAllBtn?.addEventListener('click', () => {
+        const allOpen = items.every((item) => item.dataset.open === 'true');
+        items.forEach((item) => setItemState(item, !allOpen));
+        syncToggleAllLabel();
+      });
+
+      syncToggleAllLabel();
+    });
+  }
+
+  initProcessAccordions();
+  document.addEventListener('astro:page-load', initProcessAccordions);
+</script>
+
+<style>
+  .process-accordion {
+    margin: 18px 0 32px 0;
+  }
+
+  .process-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+
+  .process-count {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .process-toggle-all {
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .process-toggle-all:hover {
+    background: var(--primary-blue-soft);
+  }
+
+  .process-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .process-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .process-item:hover {
+    border-color: rgba(51, 33, 255, 0.24);
+  }
+
+  .process-item[data-open='true'] {
+    background: #ffffff;
+    border-color: rgba(51, 33, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(51, 33, 255, 0.06);
+  }
+
+  .process-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+
+  .process-badge {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: var(--primary-blue-soft);
+    color: var(--primary-blue);
+    border: 1px solid rgba(51, 33, 255, 0.16);
+    font-family: var(--font-heading);
+    font-size: 0.84rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .process-item[data-open='true'] .process-badge {
+    background: var(--primary-blue);
+    color: #ffffff;
+    border-color: var(--primary-blue);
+  }
+
+  .process-header-text {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    min-width: 0;
+  }
+
+  .process-title {
+    font-family: var(--font-heading);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    transition: color 0.22s ease;
+  }
+
+  .process-item[data-open='true'] .process-title {
+    color: var(--primary-blue);
+  }
+
+  .process-meta {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(15, 23, 42, 0.05);
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .process-chevron {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: transform 0.3s var(--ease-smooth), color 0.22s ease, background-color 0.22s ease;
+  }
+
+  .process-item[data-open='true'] .process-chevron {
+    transform: rotate(180deg);
+    color: var(--primary-blue);
+    background: var(--primary-blue-soft);
+  }
+
+  /* Silky 60fps CSS Grid Accordion Reveal */
+  .process-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.32s var(--ease-smooth), opacity 0.24s ease;
+  }
+
+  .process-item[data-open='true'] .process-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .process-panel-inner {
+    overflow: hidden;
+    padding: 0 20px 0 66px;
+  }
+
+  .process-panel-inner--with-media {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, var(--step-img-width, 40%));
+    gap: 24px;
+    align-items: center;
+  }
+
+  .process-media {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .process-media--below {
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .process-media-link {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    cursor: zoom-in;
+  }
+
+  .process-media-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(51, 33, 255, 0.12);
+    border-color: rgba(51, 33, 255, 0.25);
+  }
+
+  .process-media-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .process-media-caption {
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .process-embed {
+    margin: 16px 0 0 0;
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .process-embed-frame {
+    width: 100%;
+    height: var(--step-embed-height, 460px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+  }
+
+  .process-embed-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .process-item[data-open='true'] .process-panel-inner {
+    padding-bottom: 18px;
+  }
+
+  .process-desc {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.72;
+    color: var(--text-muted);
+  }
+
+  .process-bullets {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
+    list-style: disc;
+    color: var(--text-muted);
+    font-size: 0.99rem;
+    line-height: 1.7;
+  }
+
+  .process-bullets li {
+    margin-bottom: 6px;
+  }
+
+  .process-bullets li:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 720px) {
+    .process-panel-inner--with-media {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .process-trigger {
+      padding: 14px 14px;
+      gap: 12px;
+    }
+
+    .process-badge {
+      width: 28px;
+      height: 28px;
+      font-size: 0.78rem;
+    }
+
+    .process-title {
+      font-size: 0.96rem;
+    }
+
+    .process-panel-inner {
+      padding: 0 14px 0 54px;
+    }
+
+    .process-embed-frame {
+      height: 340px;
+    }
+
+    .process-item[data-open='true'] .process-panel-inner {
+      padding-bottom: 16px;
+    }
+  }
+</style>

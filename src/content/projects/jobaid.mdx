@@ -27,6 +27,7 @@ meta:
   - label: "Timeline"
     value: "Nov–Dec 2025"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Overview & Learning Objectives
 
@@ -39,15 +40,39 @@ Clarified procedural confusion, specifically regarding the "flashing" (loading) 
 * **1B-AP-10:** Students will construct a multi-step digital program by sequencing drag-and-drop command blocks within the OzoBlockly workspace.
 * **1B-CS-03:** Students will determine system-level problems (troubleshooting) by interpreting visual feedback from the hardware. *(Evidence: Using the "flickering green" light or the calibration color-cycle to verify successful code transmission.)*
 
-## Process
+## Design Process
 
 I utilized a multimodal capture approach to bridge the gap between digital software and physical hardware:
 
-* **Digital Capture:** Used TechSmith Snagit to capture high-resolution screenshots of the OzoBlockly interface, ensuring UI elements (buttons and menus) were crisp and recognizable.
-* **Physical Capture:** Photographed the physical interactions (hand placement and robot positioning against the screen). This is a critical instructional choice, as it shows the learner exactly how to hold the device, a nuance often lost in digital-only guides.
-* **Instructional Signaling:** Applied signaling principles using high-contrast red numbered callouts and directional arrows, guiding the learner’s eye through the "Z-pattern" of the layout so they don't skip critical steps like calibration (Step 4).
-* **Concise Micro-Copy:** Distilled complex technical steps into clear Action Verbs (*Open*, *Create*, *Flash*, *Calibrate*, *Run*) to minimize reading time and maximize active "doing."
-* **Accessibility Integration:** Integrated a QR Code to allow students to bypass manual URL entry, reducing the barrier to entry for younger learners.
+<ProcessAccordion
+  steps={[
+    {
+      title: "Digital Capture",
+      description:
+        "Used TechSmith Snagit to capture high-resolution screenshots of the OzoBlockly interface, ensuring UI elements (buttons and menus) were crisp and recognizable.",
+    },
+    {
+      title: "Physical Capture",
+      description:
+        "Photographed the physical interactions (hand placement and robot positioning against the screen). This is a critical instructional choice, as it shows the learner exactly how to hold the device, a nuance often lost in digital-only guides.",
+    },
+    {
+      title: "Instructional Signaling",
+      description:
+        'Applied signaling principles using high-contrast red numbered callouts and directional arrows, guiding the learner’s eye through the "Z-pattern" of the layout so they don\'t skip critical steps like calibration (Step 4).',
+    },
+    {
+      title: "Concise Micro-Copy",
+      description:
+        'Distilled complex technical steps into clear Action Verbs (Open, Create, Flash, Calibrate, Run) to minimize reading time and maximize active "doing."',
+    },
+    {
+      title: "Accessibility Integration",
+      description:
+        "Integrated a QR Code to allow students to bypass manual URL entry, reducing the barrier to entry for younger learners.",
+    },
+  ]}
+/>
 
 ## Takeaway
 

@@ -24,16 +24,37 @@ meta:
   - label: "Focus Area"
     value: "Search Engine Optimization (SEO), AI Optimization (AIO), Discovery & Alignment, Collaborative Instructional Design"
 ---
+import ProcessAccordion from '../../components/ProcessAccordion.astro';
 
 ## Project Overview
 
 Collaborating as one of five instructional designers, I worked closely with a marketing subject matter expert (SME) to structure and build this course through an initial discovery phase with the stakeholder, the business owner of a photography education business. Together, we translated domain expertise and business goals into clear, actionable learning modules designed for 200 photographers seeking sustainable organic visibility across both search engines and AI-driven discovery tools.
 
-## Design & Collaboration Process
+## Design Process
 
 Our five-designer team aligned on goals, translated technical marketing concepts into photography-specific workflows, and structured modules for practical application.
 
-1. **Stakeholder Discovery:** Partnered with the photography education business owner during discovery to clarify learner needs, business priorities, and course expectations.
-2. **SME Alignment on SEO & AIO:** Worked alongside the marketing SME to unpack core SEO and AIO principles and frame them around real photography business scenarios.
-3. **Team Co-Design & Sequencing:** Coordinated across our five-person instructional design team to organize lessons logically from foundational concepts to implementation.
-4. **Course Refinement for 200 Photographers:** Iterated on clarity, pacing, and practical takeaways so photographers could immediately apply search and AI visibility practices to their businesses.
+<ProcessAccordion
+  steps={[
+    {
+      title: "Stakeholder Discovery",
+      description:
+        "Partnered with the photography education business owner during discovery to clarify learner needs, business priorities, and course expectations.",
+    },
+    {
+      title: "SME Alignment on SEO & AIO",
+      description:
+        "Worked alongside the marketing SME to unpack core SEO and AIO principles and frame them around real photography business scenarios.",
+    },
+    {
+      title: "Team Co-Design & Sequencing",
+      description:
+        "Coordinated across our five-person instructional design team to organize lessons logically from foundational concepts to implementation.",
+    },
+    {
+      title: "Course Refinement for 200 Photographers",
+      description:
+        "Iterated on clarity, pacing, and practical takeaways so photographers could immediately apply search and AI visibility practices to their businesses.",
+    },
+  ]}
+/>
